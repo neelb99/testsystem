@@ -5,6 +5,7 @@ import ViewStudents from './Components/ViewStudents.component';
 import Leaderboard from './Components/Leaderboard.component';
 import AddQuestion from './Components/AddQuestion.component';
 import Test from './Components/Test.component';
+import ViewReports from './Components/ViewReports.component'
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Route exact path = '/leaderboard' component={Leaderboard}></Route>
       <Route exact path = '/addquestion' component={AddQuestion}></Route>
       <Route exact path = '/test' component={Test}></Route>
+      <Route path = '/viewreports/' component={ViewReports}></Route>
     </BrowserRouter>
   );
 }

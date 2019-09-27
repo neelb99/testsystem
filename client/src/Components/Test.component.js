@@ -6,13 +6,14 @@ const Test = ()=>{
     const [easyQuestions,setEasyQuestions] = useState([]);
     const [mediumQuestions,setMediumQuestions] = useState([]);
     const [hardQuestions,setHardQuestions] = useState([]);
-    const [totalQuestions,setTotalQuestions] = useState(0);
-    const [rightQuestions,setRightQuestions] = useState(0);
-    const [percentage,setPercentage] = useState(0);
+    const [scoreArray, setScoreArray] = useState([0,0])
+    const [percentageArray,setPercentageArray] = useState([0],false);
     const [started,setStarted] = useState(false);
     const[currentQuestion,setCurrentQuestion] = useState(null);
     const [currentAnswer,setCurrentAnswer] = useState('');
     const [currentOptions,setCurrentOptions] = useState([]);
+    const [finished,setFinished] = useState(false);
+
     useEffect(()=>{
         const username = sessionStorage.getItem('username');
         if(username===null)
@@ -28,22 +29,17 @@ const Test = ()=>{
 
     const startTest = ()=>{
         setStarted(true);
-        getQuestion()
-    }
-
-    const getQuestion = ()=>{
-        setTotalQuestions(totalQuestions+1)
     }
 
     useEffect(()=>{
         if(loaded){
-            if(percentage<35){
+            if(percentageArray[0]<35){
                 const random = Math.floor(Math.random()*easyQuestions.length);
                 const question = easyQuestions[random];
                 setCurrentQuestion(question);
                 setEasyQuestions(easyQuestions.filter(thisquestion=>thisquestion!==question));
             }
-            else if(percentage>66){
+            else if(percentageArray[0]>66){
                 const random = Math.floor(Math.random()*hardQuestions.length);
                 const question = hardQuestions[random];
                 setCurrentQuestion(question);
@@ -56,7 +52,7 @@ const Test = ()=>{
                 setMediumQuestions(mediumQuestions.filter(thisquestion=>thisquestion!==question));
             }
         }
-    },[percentage,loaded])
+    },[percentageArray,loaded])
 
     useEffect(()=>{
         if(currentQuestion!==null){
@@ -74,22 +70,44 @@ const Test = ()=>{
     },[currentQuestion])
 
 
-    const handleAnswerChange = e=>{setCurrentAnswer(e.target.value); console.log(currentAnswer)}
+    const handleAnswerChange = e=>{setCurrentAnswer(e.target.value)}
 
     const nextQuestion = e=>{
         e.preventDefault();
-        if(currentAnswer===currentQuestion.answer){
-            setRightQuestions(rightQuestions+1);
-            getQuestion();
+        if(scoreArray[0]===19){
+            var percentage=0;
+            if(currentQuestion.answer===currentAnswer){
+                percentage = (scoreArray[1]+1)*100/(scoreArray[0]+1);
+            }
+            else
+                percentage = (scoreArray[1]*100)/scoreArray[0]+1;
+            const newReport = {
+                user: sessionStorage.getItem('username'),
+                score: percentage,
+                date: new Date(),
+                suggestion: "abc"
+            }
+            axios.post('/api/reports/create',newReport)
+                .then(res=>{
+                    if(res.data==="success"){
+                        window.location = '/viewreports'+sessionStorage.getItem('username');
+                    }
+                })
         }
-        else
-            getQuestion();
+        else{
+            if(currentAnswer===currentQuestion.answer){
+                setScoreArray([scoreArray[0]+1,scoreArray[1]+1])
+            }
+            else
+                setScoreArray([scoreArray[0]+1,scoreArray[1]])
+        }
     }
+
     
 
     useEffect(()=>{
-        setPercentage(rightQuestions/(totalQuestions-1)*100);
-    },[rightQuestions,totalQuestions])
+        setPercentageArray([scoreArray[1]/scoreArray[0]*100,!percentageArray[1]]);
+    },[scoreArray])
 
     const loadPage = ()=>{
         if(loaded && !started){
@@ -103,9 +121,9 @@ const Test = ()=>{
         else if(loaded && started){
             return(
                 <React.Fragment>
-                    <h3>Question no:{totalQuestions}</h3>
-                    <h3>Current Score: {rightQuestions}</h3>
-                    <h3>percentage: {percentage}</h3>
+                    <h3>Question no:{scoreArray[0]+1}</h3>
+                    <h3>Current Score: {scoreArray[1]}</h3>
+                    <h3>percentage: {percentageArray[0]}</h3>
                     <h3>difficulty: {currentQuestion.difficulty}</h3>
                     {currentQuestion.text}
                     <form onSubmit={nextQuestion}>

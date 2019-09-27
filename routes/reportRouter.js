@@ -16,8 +16,8 @@ router.route('/create').post((req,res)=>{
         });
 })
 
-router.route('/view/:id').post((req,res)=>{
-    const username = req.params.id;
+router.route('/view/:username').get((req,res)=>{
+    const username = req.params.username;
     report.find({user:username})
         .then(found=>res.json(found))
         .catch(()=>res.json("error"));
