@@ -4,7 +4,8 @@ const questionSchema = mongoose.Schema({
     text: {type:String, required:true},
     answer: {type:String, required:true},
     options: {type:Array, required:true},
-    difficulty: {type:Number, required:true}
+    tag:{type:String,required:true},
+    difficulty: {type:String, required:true}
 })
 
 const question = mongoose.model('question',questionSchema)
