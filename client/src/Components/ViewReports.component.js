@@ -14,7 +14,7 @@ const ViewReports = props=>{
         else if(username!==urlname && role!=="admin")
             window.location='/';
         else{
-            axios.get('/api/reports/view/'+username)
+            axios.get('/api/reports/view/'+urlname)
                 .then(res=>{
                     setReports(res.data)
                     setLoaded(true);

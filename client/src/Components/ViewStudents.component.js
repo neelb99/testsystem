@@ -38,7 +38,6 @@ const ViewStudents = ()=>{
                     <thead>
                         <tr>
                             <th>Name</th>
-                            <th>Max Score</th>
                             <th>View</th>
                             <th>Delete</th> 
                         </tr>
@@ -48,7 +47,6 @@ const ViewStudents = ()=>{
                             return(
                                 <tr key={student._id}>
                                     <td>{student.username}</td>
-                                    <td>{student.maxScore}</td>
                                     <td><button onClick = {()=>viewStudent(student.username)}>View</button></td>
                                     <td><button onClick = {()=>deleteStudent(student._id)}>Delete</button></td>
                                 </tr>
