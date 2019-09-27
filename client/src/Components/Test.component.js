@@ -86,12 +86,10 @@ const Test = ()=>{
                 date: new Date(),
                 suggestion: "abc"
             }
-            axios.post('/api/users/checkmax',{username:sessionStorage.getItem('username'),score:percentage})
-                .then(()=>console.log("test"))
             axios.post('/api/reports/create',newReport)
                 .then(res=>{
                     if(res.data==="success"){
-                        window.location = '/viewreports'+sessionStorage.getItem('username');
+                        window.location = '/viewreports/'+sessionStorage.getItem('username');
                     }
                 })
         }
