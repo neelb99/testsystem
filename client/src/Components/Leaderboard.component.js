@@ -2,36 +2,38 @@ import React,{useState,useEffect} from 'react';
 import axios from 'axios';
 
 const Leaderboard = ()=>{
-    const [students,setStudents] = useState([]);
+    const [reports,setReports] = useState([]);
     const [loaded,setLoaded] = useState(false);
     useEffect(()=>{
         const username = sessionStorage.getItem('username');
         if(username===null)
             window.location='/';
-        axios.get('/api/users/view')
+        axios.get('/api/reports/viewall')
             .then(res=>{
-                setStudents(res.data.filter(item=>item.role!=="admin"));
+                setReports(res.data);
                 setLoaded(true);
             })
     },[])
 
     const generateTable = ()=>{
-        const sorted = students.sort((a,b)=>b.maxScore-a.maxScore);
+        const sorted = reports.sort((a,b)=>b.score-a.score);
         if(loaded){
             return (
                 <table>
                     <thead>
                         <tr>
                             <th>Name</th>
-                            <th>Max Score</th>
+                            <th>Score</th>
+                            <th>Date</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {sorted.map(student=>{
+                        {sorted.map(report=>{
                             return(
-                                <tr key={student._id}>
-                                    <td>{student.username}</td>
-                                    <td>{student.maxScore}</td>
+                                <tr key={report._id}>
+                                    <td>{report.user}</td>
+                                    <td>{report.score.toFixed(2)}</td>
+                                    <td>{report.date.substring(0,10)}</td>
                                 </tr>
                             );
                         })}

@@ -18,8 +18,8 @@ const ViewStudents = ()=>{
             })
     },[])
 
-    const viewStudent = id=>{
-        window.location = '/students/'+id;
+    const viewStudent = name=>{
+        window.location = '/viewreports/'+name;
     }
 
     const deleteStudent = id=>{
@@ -49,7 +49,7 @@ const ViewStudents = ()=>{
                                 <tr key={student._id}>
                                     <td>{student.username}</td>
                                     <td>{student.maxScore}</td>
-                                    <td><button onClick = {()=>viewStudent(student._id)}>View</button></td>
+                                    <td><button onClick = {()=>viewStudent(student.username)}>View</button></td>
                                     <td><button onClick = {()=>deleteStudent(student._id)}>Delete</button></td>
                                 </tr>
                             );

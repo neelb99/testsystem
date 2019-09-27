@@ -12,7 +12,6 @@ const Test = ()=>{
     const[currentQuestion,setCurrentQuestion] = useState(null);
     const [currentAnswer,setCurrentAnswer] = useState('');
     const [currentOptions,setCurrentOptions] = useState([]);
-    const [finished,setFinished] = useState(false);
 
     useEffect(()=>{
         const username = sessionStorage.getItem('username');
@@ -87,6 +86,8 @@ const Test = ()=>{
                 date: new Date(),
                 suggestion: "abc"
             }
+            axios.post('/api/users/checkmax',{username:sessionStorage.getItem('username'),score:percentage})
+                .then(()=>console.log("test"))
             axios.post('/api/reports/create',newReport)
                 .then(res=>{
                     if(res.data==="success"){

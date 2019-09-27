@@ -31,7 +31,7 @@ const ViewReports = props=>{
                             <div key={report._id}>
                                 <h4>Score:{report.score}</h4>
                                 <h4>Suggestion:{report.suggestion}</h4>
-                                <h4>Date: {report.date}</h4>
+                                <h4>Date: {report.date.substring(0,10)}</h4>
                             </div>
                         );
                     })}

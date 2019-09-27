@@ -23,4 +23,9 @@ router.route('/view/:username').get((req,res)=>{
         .catch(()=>res.json("error"));
 })
 
+router.route('/viewall').get((req,res)=>{
+    report.find()
+        .then(found=>res.json(found));
+})
+
 module.exports = router;

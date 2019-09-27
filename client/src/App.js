@@ -6,12 +6,13 @@ import Leaderboard from './Components/Leaderboard.component';
 import AddQuestion from './Components/AddQuestion.component';
 import Test from './Components/Test.component';
 import ViewReports from './Components/ViewReports.component'
+import Home from './Components/Home.component';
 
 function App() {
   return (
     <BrowserRouter>
       <Route exact path = '/' component={Landing}></Route>
-      <Route exact path = '/home'></Route>
+      <Route exact path = '/home' component={Home}></Route>
       <Route exact path = '/viewstudents' component={ViewStudents}></Route>
       <Route exact path = '/leaderboard' component={Leaderboard}></Route>
       <Route exact path = '/addquestion' component={AddQuestion}></Route>
