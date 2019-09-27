@@ -49,10 +49,14 @@ const Landingform = ()=>{
                 // if username and password match
                 else{
                     sessionStorage.setItem('username',res.data.username);
+                    sessionStorage.setItem('role', res.data.role);
                     window.location = '/home';
                 }
             })
-            .catch(()=>console.log("error"));
+            .catch(()=>{
+                setDisplayError('block');
+                setError('Server Error');
+            });
     }
 
     // Method to be executed when the user tries to register, sends a post request to server and performs actions based on response (check userRouter)
@@ -78,11 +82,15 @@ const Landingform = ()=>{
                 }
                 // if registration is successful
                 else{
-                    sessionStorage.setItem('username',res.data.username);
+                    sessionStorage.setItem('username',user.username);
+                    sessionStorage.setItem('role', "student");
                     window.location = '/home';
                 }
             })
-            .catch(()=>console.log("error"));
+            .catch(()=>{
+                setDisplayError('block');
+                setError('Server Error');
+            });
     }
     
     // Method to generate either login or register form based on formType
