@@ -1,5 +1,6 @@
 import React,{useState} from 'react';
 import axios from 'axios';
+import Google from './Google.component';
 
 const Landingform = ()=>{
     // To switch between login and register forms
@@ -115,6 +116,9 @@ const Landingform = ()=>{
                 <form onSubmit={register}>
                     <h1>Register</h1>
                     <p style={errorStyle}>{error}</p>
+                    <div className="form-group">
+                        <Google />
+                    </div>
                     <div className="form-group">
                         <input className="form-control" placeholder="Username" type="text" value={username} onChange={onChangeUsername}></input>
                     </div>

@@ -1,6 +1,8 @@
 import React,{useState, useEffect} from 'react';
 import axios from 'axios';
 import './css/ViewStudents.css';
+import Logout from './Logout.component';
+import Back from './Back.component';
 
 const ViewStudents = ()=>{
     const [students,setStudents] = useState([]);
@@ -35,6 +37,9 @@ const ViewStudents = ()=>{
     const generateTable = ()=>{
         if(loaded){
             return (
+                <React.Fragment>
+                <Logout />
+                <Back />
                 <table className="table table-dark text-center">
                     <thead>
                         <tr>
@@ -55,6 +60,7 @@ const ViewStudents = ()=>{
                         })}
                     </tbody>
                 </table>
+                </React.Fragment>
             );
         }
     }

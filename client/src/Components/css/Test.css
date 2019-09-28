@@ -1,17 +1,18 @@
 #test{
-    padding-top:30px;
+    padding-top:55px;
     display: flex;
     justify-content: center;
     min-height: 100vh;
     padding-bottom:30px;
+    align-items: center;
 }
 
 #test .jumbotron{
-    min-width: 60vw;
+    min-width: 40vw;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
     font-size:20px;
     color:black;
     padding: 20px;
@@ -22,16 +23,33 @@
     padding-bottom:10px;
 }
 
-#test #testjumbotron{
-    align-items: flex-start;
-    justify-content: flex-start;
+#test .jumbotron h1{
+    padding-bottom: 20px;
 }
 
-#test .jumbotron #topdiv{
-    display: flex;
-    width:100%;
-    flex-direction: row;
+#test .jumbotron ul{
+    padding-bottom: 20px;
+}
+
+
+#test #testjumbotron .jumbotron{
     align-items: flex-start;
     justify-content: space-between;
+    padding: 20px;
+    font-size:24px;
+}
+
+
+#test #topdiv{
+    display: flex;
+    width:100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+#test #testjumbotron .jumbotron input{
+    margin-top:10px;
 }
 

@@ -2,6 +2,8 @@ import React,{useState,useEffect} from 'react';
 import axios from 'axios';
 import ReportCard from './ReportCard.component';
 import './css/Reports.css'
+import Logout from './Logout.component';
+import Back from './Back.component';
 
 const ViewReports = props=>{
     const [loaded,setLoaded] = useState(false);
@@ -28,6 +30,8 @@ const ViewReports = props=>{
         if(loaded){
             return(
                 <React.Fragment>
+                    <Logout />
+                    <Back />
                     {reports.map((report,index)=>{
                         return(
                             <ReportCard key={report._id} number={reports.length-(index)} score={report.score} suggestion={report.suggestion} date={report.date.substring(0,10)}/>

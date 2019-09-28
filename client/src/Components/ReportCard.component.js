@@ -7,7 +7,7 @@ const ReportCard = props=>{
             <div className="jumbotron">
                     <h3 className="text-center ">Result #{props.number}</h3>
                     <h4><b>Score: </b>{props.score}</h4>
-                    <h4><b>Suggestion: </b>{props.suggestion}</h4>
+                    <h4><b>Topics to work on: </b>{props.suggestion}</h4>
                     <h4><b>Date: </b>{props.date}</h4>
             </div>
         </div>

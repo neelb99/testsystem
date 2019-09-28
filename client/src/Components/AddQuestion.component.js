@@ -1,6 +1,8 @@
 import React,{useState,useEffect} from 'react';
 import axios from 'axios'
 import './css/AddQuestion.css'
+import Back from './Back.component';
+import Logout from './Logout.component';
 
 const AddQuestion = ()=>{
     const [loaded,setLoaded] = useState(false);
@@ -106,6 +108,8 @@ const AddQuestion = ()=>{
         if(loaded){
             return(
                 <React.Fragment>
+                    <Back />
+                    <Logout />
                     {addForm()}
                     <div id="questiontable">
                         <table className="table table-dark text-center">

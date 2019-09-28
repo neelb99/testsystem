@@ -1,6 +1,8 @@
 import React,{useState,useEffect} from 'react';
 import axios from 'axios';
 import './css/Test.css';
+import Logout from './Logout.component';
+import Back from './Back.component';
 
 const Test = ()=>{
     const [loaded,setLoaded] = useState(false);
@@ -13,6 +15,7 @@ const Test = ()=>{
     const[currentQuestion,setCurrentQuestion] = useState(null);
     const [currentAnswer,setCurrentAnswer] = useState('');
     const [currentOptions,setCurrentOptions] = useState([]);
+    const [wrongCategories, setWrongCategories] = useState([]);
 
     useEffect(()=>{
         const username = sessionStorage.getItem('username');
@@ -63,7 +66,6 @@ const Test = ()=>{
                 options[i-1]=currentOptions[random];
                 currentOptions.splice(random,1)
             }
-            setCurrentAnswer(options[0]);
             setCurrentOptions(options);
         }
             
@@ -76,16 +78,28 @@ const Test = ()=>{
         e.preventDefault();
         if(scoreArray[0]===19){
             var percentage=0;
+            var finalWrong = [];
             if(currentQuestion.answer===currentAnswer){
                 percentage = (scoreArray[1]+1)*100/(scoreArray[0]+1);
+                finalWrong = wrongCategories;
             }
-            else
+            else{
                 percentage = (scoreArray[1]*100)/scoreArray[0]+1;
+                finalWrong = [...wrongCategories,currentQuestion.tag]
+            }
+            var suggestions="";
+            if(finalWrong.length>0){
+                finalWrong.map(category=>{
+                    if(!suggestions.includes(category))
+                        suggestions+=category+', ';
+                })
+            }
+            else suggestions = "None!"
             const newReport = {
                 user: sessionStorage.getItem('username'),
-                score: percentage,
+                score: Math.ceil(percentage),
                 date: new Date(),
-                suggestion: "abc"
+                suggestion: suggestions.substring(0,suggestions.length-2)
             }
             axios.post('/api/reports/create',newReport)
                 .then(res=>{
@@ -97,13 +111,23 @@ const Test = ()=>{
         else{
             if(currentAnswer===currentQuestion.answer){
                 setScoreArray([scoreArray[0]+1,scoreArray[1]+1])
+                setCurrentAnswer('')
             }
-            else
+            else{
                 setScoreArray([scoreArray[0]+1,scoreArray[1]])
+                setWrongCategories([...wrongCategories,currentQuestion.tag])
+                setCurrentAnswer('')
+            }
         }
     }
 
-    
+    const getPercentage = ()=>{
+        const ans =percentageArray[0].toFixed(2)
+        if(scoreArray[0]==0)
+            return 0
+        else
+            return ans
+    }
 
     useEffect(()=>{
         setPercentageArray([scoreArray[1]/scoreArray[0]*100,!percentageArray[1]]);
@@ -112,8 +136,11 @@ const Test = ()=>{
     const loadPage = ()=>{
         if(loaded && !started){
             return(
+                <React.Fragment>
+                <Logout />
+                <Back />
                 <div className="jumbotron">
-                    <h1>Welcome to the test!</h1>
+                    <h1 className="text-center">Welcome to the test!</h1>
                     <div>
                     <h2 className="text-center">Instructions</h2>
                     <ul>
@@ -126,43 +153,42 @@ const Test = ()=>{
                     </div>
                     <button className="btn btn-primary" onClick={()=>startTest()}>Start Test</button>
                 </div>
+                </React.Fragment>
             );
         }
+
         else if(loaded && started){
             return(
-                <div className="jumbotron" id="testjumbotron">
-                    <div id="topdiv">
+                <React.Fragment>
+                    <Logout />
+                    <Back />
+                    <div id="testjumbotron">
+                        <div id="topdiv">
                         <h4>Difficulty: {currentQuestion.difficulty}</h4>
-                        <h4>Percentage: {percentageArray[0].toFixed(2)}</h4>
-                    </div>
-                    <div>
-                        <h3>Q.{scoreArray[0]+1}) {currentQuestion.text}</h3>
-                    </div>
+                        <h4>Score: {getPercentage()}</h4>
+                        </div>
+                        <div className="jumbotron">
+                        <h4>Q.{scoreArray[0]+1}) {currentQuestion.text}</h4><br />
                     <form onSubmit={nextQuestion}>
                         {currentOptions.map((option,index)=>{
-                            if(index==0)
-                                return(
-                                    <React.Fragment>
-                                        <input type="radio" checked name="ans" onChange={handleAnswerChange} value={option}/>{option}<br/>
-                                    </React.Fragment>
-                                );
-                            else{
-                                return (
-                                    <React.Fragment>
-                                        <input type="radio" name="ans" onChange={handleAnswerChange} value={option}/>{option}<br/>
-                                    </React.Fragment>
-                                );
-                            }
+                            return (
+                                <React.Fragment>
+                                    {index+1}) <input required checked={currentAnswer===option} type="radio" name="ans" onChange={handleAnswerChange} value={option}/> {option}<br/><br />
+                                </React.Fragment>
+                            );
+                            
                         })}
-                        <input type="submit" ></input>
+                        <input className= "btn btn-success" type="submit" ></input>
                     </form>
+                    </div>
                 </div>
+                </React.Fragment>
             )
         }
     }
 
     return(
-        <div id="test">
+        <div id="test" >
             {loadPage()}
         </div>
     );

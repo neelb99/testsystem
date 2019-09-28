@@ -6,6 +6,7 @@ import star from '../images/star.png';
 import exam from '../images/exam.png';
 import student from '../images/student.png';
 import question from '../images/question.png';
+import Logout from './Logout.component';
 
 const Home = ()=>{
     const [loaded,setLoaded] = useState(false);
@@ -25,6 +26,7 @@ const Home = ()=>{
             if(role === "admin"){
                 return(
                     <React.Fragment>
+                        <Logout />
                         <Card img={student} link="/viewstudents" buttonText="Manage Students"/>
                         <Card img={star} link="/leaderboard" buttonText="Leaderboard"/>
                         <Card img={question} link= "/addquestion" buttonText="Add Question"/>
@@ -34,6 +36,7 @@ const Home = ()=>{
             else{
                 return(
                     <React.Fragment>
+                        <Logout />
                         <Card img={exam} link="/test" buttonText="Take Test"/>
                         <Card img={star} link="/leaderboard" buttonText="Leaderboard"/>
                         <Card img={report} link= {"/viewreports/"+username} buttonText="Previous Reports"/>
