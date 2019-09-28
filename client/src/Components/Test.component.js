@@ -126,11 +126,20 @@ const Test = ()=>{
                     <h3>difficulty: {currentQuestion.difficulty}</h3>
                     {currentQuestion.text}
                     <form onSubmit={nextQuestion}>
-                        {currentOptions.map(option=>{
-                            return (<React.Fragment>
-                                <input type="radio" name="ans" onChange={handleAnswerChange} value={option}/>{option}
-                                </React.Fragment>
+                        {currentOptions.map((option,index)=>{
+                            if(index==0)
+                                return(
+                                    <React.Fragment>
+                                        <input type="radio" checked name="ans" onChange={handleAnswerChange} value={option}/>{option}
+                                    </React.Fragment>
                                 );
+                            else{
+                                return (
+                                    <React.Fragment>
+                                        <input type="radio" name="ans" onChange={handleAnswerChange} value={option}/>{option}
+                                    </React.Fragment>
+                                );
+                            }
                         })}
                         <input type="submit" ></input>
                     </form>

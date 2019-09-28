@@ -107,30 +107,32 @@ const AddQuestion = ()=>{
             return(
                 <React.Fragment>
                     {addForm()}
-                    <table className="table table-dark text-center">
-                        <thead>
-                            <tr>
-                                <th>Question</th>
-                                <th>Answer</th>
-                                <th>Difficulty</th>
-                                <th>Tag</th> 
-                                <th>Delete</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {questions.map((question,key)=>{
-                                return(
-                                    <tr key={key}>
-                                        <td>{question.text}</td>
-                                        <td>{question.answer}</td>
-                                        <td>{question.difficulty}</td>
-                                        <td>{question.tag}</td>
-                                        <td><button className="btn btn-danger" onClick={()=>deleteQuestion(question._id)}>Delete</button></td>
-                                    </tr>
-                                );
-                            })}
-                        </tbody>
-                    </table>
+                    <div id="questiontable">
+                        <table className="table table-dark text-center">
+                            <thead>
+                                <tr>
+                                    <th>Question</th>
+                                    <th>Answer</th>
+                                    <th>Difficulty</th>
+                                    <th>Tag</th> 
+                                    <th>Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {questions.map((question,key)=>{
+                                    return(
+                                        <tr key={key}>
+                                            <td>{question.text}</td>
+                                            <td>{question.answer}</td>
+                                            <td>{question.difficulty}</td>
+                                            <td>{question.tag}</td>
+                                            <td><button className="btn btn-danger" onClick={()=>deleteQuestion(question._id)}>Delete</button></td>
+                                        </tr>
+                                    );
+                                })}
+                            </tbody>
+                        </table>
+                    </div>
                 </React.Fragment>
             );
         }

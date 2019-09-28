@@ -13,3 +13,7 @@
 #addquestion .jumbotron h1{
     padding-bottom:20px;
 }
+
+#questiontable{
+    overflow-x: auto;
+}
