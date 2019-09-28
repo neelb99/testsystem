@@ -13,7 +13,7 @@ router.get(
         var user = {
             email:req.user.email
         }
-        res.redirect("http://localhost:3000/"+user.email)
+        res.redirect("https://testingassignment.herokuapp.com/"+user.email)
     }
 );
 

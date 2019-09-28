@@ -4,13 +4,9 @@ import axios from 'axios';
 
 const Google = ()=>{
 
-    const handleClick = ()=>{
-        axios.get('https://testingassignment.herokuapp.com/auth/google')
-    }
-
     return(
         <div id="google">
-            <a href="http://localhost:5000/auth/google" class="button">
+            <a href="https://testingassignment.herokuapp.com/auth/google" class="button">
                     <div>
                         <span class="svgIcon t-popup-svg">
                         <svg
