@@ -2,6 +2,7 @@ const router = require('express').Router();
 const user = require('../models/user.model');
 const bcrypt = require('bcrypt');
 
+// Registration route
 router.route('/register').post((req,res)=>{
     user.findOne({username:req.body.username})
         .then(foundUser=>{
@@ -9,6 +10,7 @@ router.route('/register').post((req,res)=>{
                 res.json("found");
             }
             else{
+                // Encryption
                 bcrypt.hash(req.body.password,10)
                     .then(encrypted=>{
                         const password = encrypted;
@@ -26,6 +28,7 @@ router.route('/register').post((req,res)=>{
         })
 })
 
+// Login verification
 router.route('/login').post((req,res)=>{
     const username = req.body.username;
     const password = req.body.password;
@@ -52,6 +55,7 @@ router.route('/view').get((req,res)=>{
         .then(found=>res.json(found))
 })
 
+// Route to delete individual user
 router.route('/delete/:id').get((req,res)=>{
     user.findByIdAndDelete(req.params.id)
         .then(()=>res.json("deleted"))

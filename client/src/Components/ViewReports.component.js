@@ -6,9 +6,12 @@ import Logout from './Logout.component';
 import Back from './Back.component';
 
 const ViewReports = props=>{
+    // To Check if loaded
     const [loaded,setLoaded] = useState(false);
+    // list of reports
     const [reports,setReports] = useState([]);
 
+    // Checks if user is logged in and populates reports
     useEffect(()=>{
         const username = sessionStorage.getItem('username');
         const urlname = props.location.pathname.substring(13);
@@ -26,6 +29,7 @@ const ViewReports = props=>{
         }
     },[])
 
+    // Generates individual cars for each report
     const loadPage = ()=>{
         if(loaded){
             return(

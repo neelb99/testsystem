@@ -5,8 +5,11 @@ import Logout from './Logout.component';
 import Back from './Back.component';
 
 const Leaderboard = ()=>{
+    // List fo reports
     const [reports,setReports] = useState([]);
+    // Checks if loaded
     const [loaded,setLoaded] = useState(false);
+    // Checks if user is logged in and gets reports
     useEffect(()=>{
         const username = sessionStorage.getItem('username');
         if(username===null)
@@ -18,6 +21,7 @@ const Leaderboard = ()=>{
             })
     },[])
 
+    // Generates leaderboard table
     const generateTable = ()=>{
         const sorted = reports.sort((a,b)=>b.score-a.score);
         if(loaded){

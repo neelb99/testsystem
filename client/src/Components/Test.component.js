@@ -5,18 +5,30 @@ import Logout from './Logout.component';
 import Back from './Back.component';
 
 const Test = ()=>{
+    // Check if loaded
     const [loaded,setLoaded] = useState(false);
+    // List of questions with easy difficulty
     const [easyQuestions,setEasyQuestions] = useState([]);
+    // List of questions with medium difficulty
     const [mediumQuestions,setMediumQuestions] = useState([]);
+    // List of questions with hard difficulty
     const [hardQuestions,setHardQuestions] = useState([]);
+    // holds current question number and current number of correct answers
     const [scoreArray, setScoreArray] = useState([0,0])
+    // holds current score and a boolean to update state
     const [percentageArray,setPercentageArray] = useState([0],false);
+    // checks if test has been started
     const [started,setStarted] = useState(false);
+    // Holds the current question
     const[currentQuestion,setCurrentQuestion] = useState(null);
+    // Holds the current answer
     const [currentAnswer,setCurrentAnswer] = useState('');
+    // Holds the current options
     const [currentOptions,setCurrentOptions] = useState([]);
+    // Array of categories of questions that have been answered wrong(Used for suggestions)
     const [wrongCategories, setWrongCategories] = useState([]);
 
+    // Checks if user is logged in and populates questions
     useEffect(()=>{
         const username = sessionStorage.getItem('username');
         if(username===null)
@@ -30,13 +42,15 @@ const Test = ()=>{
             })
     },[])
 
+    // Starts the test
     const startTest = ()=>{
         setStarted(true);
     }
 
+    // Checks the current score and gives the next question based on the score
     useEffect(()=>{
         if(loaded){
-            if(percentageArray[0]<35){
+            if(percentageArray[0]<33){
                 const random = Math.floor(Math.random()*easyQuestions.length);
                 const question = easyQuestions[random];
                 setCurrentQuestion(question);
@@ -57,6 +71,7 @@ const Test = ()=>{
         }
     },[percentageArray,loaded])
 
+    // Gets the options of the current question and shuffles them
     useEffect(()=>{
         if(currentQuestion!==null){
             var currentOptions = currentQuestion.options;
@@ -71,9 +86,10 @@ const Test = ()=>{
             
     },[currentQuestion])
 
-
+    // updates answer
     const handleAnswerChange = e=>{setCurrentAnswer(e.target.value)}
 
+    // Generates report if test is over otherwise checks if answer is correct
     const nextQuestion = e=>{
         e.preventDefault();
         if(scoreArray[0]===19){
@@ -121,6 +137,7 @@ const Test = ()=>{
         }
     }
 
+    // Gives the current score
     const getPercentage = ()=>{
         const ans =percentageArray[0].toFixed(2)
         if(scoreArray[0]==0)
@@ -129,10 +146,12 @@ const Test = ()=>{
             return ans
     }
 
+    // Sets the Score 
     useEffect(()=>{
         setPercentageArray([scoreArray[1]/scoreArray[0]*100,!percentageArray[1]]);
     },[scoreArray])
 
+    // Prints the questions/Introduction based on if the test has been started
     const loadPage = ()=>{
         if(loaded && !started){
             return(

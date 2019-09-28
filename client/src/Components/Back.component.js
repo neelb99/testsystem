@@ -2,6 +2,8 @@ import React from 'react';
 import img from '../images/back.png'
 import './css/nav.css';
 
+// Back button
+
 const Back = ()=>{
     
     const handleClick = ()=>{

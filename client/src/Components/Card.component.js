@@ -2,6 +2,8 @@ import React from 'react';
 
 const Card = props=>{
 
+    // Returns cards for the dashboard
+
     const handleClick = ()=>{
         window.location = props.link;
     }

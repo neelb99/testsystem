@@ -9,9 +9,14 @@ import question from '../images/question.png';
 import Logout from './Logout.component';
 
 const Home = ()=>{
+    // Checks if loaded
     const [loaded,setLoaded] = useState(false);
+    // gets user's role
     const role = sessionStorage.getItem('role');
+    // gets user's username
     const username = sessionStorage.getItem('username');
+
+    // checks if user is logged in
     useEffect(()=>{
         
         if(username===null)
@@ -21,6 +26,7 @@ const Home = ()=>{
         
     },[])
 
+    // Loads dashboard based on if user is student or admin
     const loadPage = ()=>{
         if(loaded){
             if(role === "admin"){

@@ -1,7 +1,7 @@
 import React from 'react';
 
 const ReportCard = props=>{
-
+    // Returns a card with relevant information from report
     return(
         <div className="col-md-4 col-10 offset-1 offset-md-0 text-left  homecard">
             <div className="jumbotron">

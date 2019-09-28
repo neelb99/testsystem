@@ -5,8 +5,11 @@ import Back from './Back.component';
 import Logout from './Logout.component';
 
 const AddQuestion = ()=>{
+    // Checks if loaded
     const [loaded,setLoaded] = useState(false);
+    // List of all questions
     const [questions,setQuestions] = useState([]);
+    // State variables for form
     const[text,setText] = useState('');
     const[answer,setAnswer] = useState('');
     const [option2,setOption2] = useState('');
@@ -14,8 +17,12 @@ const AddQuestion = ()=>{
     const [option4,setOption4] = useState('');
     const [difficulty,setDifficulty] = useState('Easy');
     const [tag,setTag] = useState('');
+    // Displays if question has been added
     const [display,setDisplay] = useState('none');
+    // To update the table if question is added or deleted
     const [check,setCheck] = useState(false);
+
+    // Checks if user is logged in and admin, and populates questions
     useEffect(()=>{
         const username = sessionStorage.getItem('username');
         const role = sessionStorage.getItem('role');
@@ -32,6 +39,7 @@ const AddQuestion = ()=>{
         }
     },[check])
 
+    // Form state changes
     const onChangeText = e=>{setText(e.target.value)}
     const onChangeAnswer = e=>{setAnswer(e.target.value)}
     const onChangeOption2 = e=>{setOption2(e.target.value)}
@@ -40,6 +48,7 @@ const AddQuestion = ()=>{
     const onChangeTag = e=>{setTag(e.target.value)}
     const onChangeDifficulty = e=>{setDifficulty(e.target.value)}
 
+    // Adds new question to database from form data
     const newQuestion = e=>{
         setDisplay('none');
         e.preventDefault();
@@ -50,7 +59,6 @@ const AddQuestion = ()=>{
             tag: tag,
             difficulty: difficulty
         }
-        console.log(question);
         axios.post('/api/questions/add',question)
             .then(res=>{
                 console.log(res.data);
@@ -59,6 +67,7 @@ const AddQuestion = ()=>{
             })
     }
 
+    // Form to add question
     const addForm = ()=>{
         return(
             <div className="jumbotron col-10 offset-1 col-md-6 offset-md-3">
@@ -99,11 +108,13 @@ const AddQuestion = ()=>{
         );
     }
 
+    // Deletes question from database
     const deleteQuestion = id=>{
         axios.get('/api/questions/delete/'+id)
             .then(()=>{setCheck(!check)})
     }
 
+    // Displays the form and table of questions if page is loaded
     const loadPage = ()=>{
         if(loaded){
             return(
@@ -142,6 +153,7 @@ const AddQuestion = ()=>{
         }
     }
 
+    // Used to display if question is added successfully
     const style={
         display: display,
         color:"green"

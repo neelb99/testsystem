@@ -4,13 +4,15 @@ import axios from 'axios';
 
 const Google = ()=>{
 
+    // Sign in with google button
+
     return(
         <div id="google">
-            <a href="https://testingassignment.herokuapp.com/auth/google" class="button">
+            <a href="https://testingassignment.herokuapp.com/auth/google" className="button">
                     <div>
-                        <span class="svgIcon t-popup-svg">
+                        <span className="svgIcon t-popup-svg">
                         <svg
-                            class="svgIcon-use"
+                            className="svgIcon-use"
                             width="25"
                             height="37"
                             viewBox="0 0 25 25"
@@ -35,7 +37,7 @@ const Google = ()=>{
                             </g>
                         </svg>
                 </span>
-                <span class="button-label">Sign in with Google</span>
+                <span className="button-label">Sign in with Google</span>
             </div>
             </a>
         </div>

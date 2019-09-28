@@ -2,6 +2,8 @@ import React from 'react';
 import img from '../images/logout.png'
 import './css/nav.css';
 
+// Logout button
+
 const Logout = ()=>{
     
     const handleClick = ()=>{

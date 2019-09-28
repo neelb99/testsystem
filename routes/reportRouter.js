@@ -1,6 +1,9 @@
 const router = require('express').Router();
 const report = require('../models/report.model');
 
+// Router for reports
+
+// Router to generate new reports
 router.route('/create').post((req,res)=>{
     const user = req.body.user;
     const score = req.body.score;
@@ -16,6 +19,7 @@ router.route('/create').post((req,res)=>{
         });
 })
 
+// Route to view a user's reports
 router.route('/view/:username').get((req,res)=>{
     const username = req.params.username;
     report.find({user:username})
@@ -23,6 +27,7 @@ router.route('/view/:username').get((req,res)=>{
         .catch(()=>res.json("error"));
 })
 
+// Route to get all reports (used to display leaderboard)
 router.route('/viewall').get((req,res)=>{
     report.find()
         .then(found=>res.json(found));

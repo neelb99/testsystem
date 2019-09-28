@@ -5,8 +5,12 @@ import Logout from './Logout.component';
 import Back from './Back.component';
 
 const ViewStudents = ()=>{
+    // List of students
     const [students,setStudents] = useState([]);
+    // Check if loaded
     const [loaded,setLoaded] = useState(false);
+
+    // Checks if user is logged in and if user is admin
     useEffect(()=>{
         const username = sessionStorage.getItem('username');
         const role = sessionStorage.getItem('role');
@@ -21,10 +25,12 @@ const ViewStudents = ()=>{
             })
     },[])
 
+    // Redirects to page to view that user's reports
     const viewStudent = name=>{
         window.location = '/viewreports/'+name;
     }
 
+    // Deletes student from the database
     const deleteStudent = id=>{
         axios.get('/api/users/delete/'+id)
             .then(res=>{
@@ -34,6 +40,7 @@ const ViewStudents = ()=>{
             })
     }
 
+    // Generates the table of users from DB
     const generateTable = ()=>{
         if(loaded){
             return (
