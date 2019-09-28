@@ -134,9 +134,9 @@ const AddQuestion = ()=>{
                                 </tr>
                             </thead>
                             <tbody>
-                                {questions.map((question,key)=>{
+                                {questions.map((question,index)=>{
                                     return(
-                                        <tr key={key}>
+                                        <tr key={index}>
                                             <td>{question.text}</td>
                                             <td>{question.answer}</td>
                                             <td>{question.difficulty}</td>
