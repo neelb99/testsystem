@@ -5,12 +5,16 @@ const path = require('path');
 const userRouter = require('./routes/userRouter');
 const reportRouter = require('./routes/reportRouter');
 const questionRouter = require('./routes/questionRouter');
+const googleRouter = require('./routes/google');
+const passport = require("passport");
 require('dotenv').config();
+require("./config/passport");
 
 const PORT = process.env.PORT || 5000;
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use(passport.initialize()); 
 
 mongoose.connect(process.env.DB_URI, {useCreateIndex:true, useNewUrlParser:true, useUnifiedTopology:true})
     .then(()=>console.log("DB Connected"))
@@ -19,6 +23,7 @@ mongoose.connect(process.env.DB_URI, {useCreateIndex:true, useNewUrlParser:true,
 app.use('/api/users',userRouter);
 app.use('/api/reports',reportRouter);
 app.use('/api/questions',questionRouter);
+app.use('/auth',googleRouter);
 
 if(PORT!==5000){
     app.use(express.static(path.join(__dirname,"client","build")));

@@ -1,11 +1,16 @@
 import React from 'react';
 import './css/Google.css';
+import axios from 'axios';
 
 const Google = ()=>{
 
+    const handleClick = ()=>{
+        axios.get('/auth/google')
+    }
+
     return(
         <div id="google">
-            <a href="/auth/google" class="button">
+            <a href="http://localhost:5000/auth/google" class="button">
                     <div>
                         <span class="svgIcon t-popup-svg">
                         <svg

@@ -2,7 +2,7 @@ import React,{useState,useEffect} from 'react';
 import LandingForm from './LandingForm.component';
 import './css/Landing.css'
 
-const Landing = ()=>{
+const Landing = props=>{
     // Load the page only if this is true
     const [loaded,setLoaded] = useState(false);
     
@@ -11,8 +11,16 @@ const Landing = ()=>{
         const username = sessionStorage.getItem('username');
         if(username!==null)
             window.location = '/home';
-        else
-            setLoaded(true);  
+        else{
+            const email = props.location.pathname.substring(1);
+            if(email==='')
+                setLoaded(true);
+            else{
+                sessionStorage.setItem('username',email);
+                sessionStorage.setItem('role','student');
+                window.location='/home';
+            }
+        }  
     },[])
 
     // Load the page is loaded is true (if user is not logged in)
