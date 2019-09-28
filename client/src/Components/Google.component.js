@@ -5,7 +5,7 @@ import axios from 'axios';
 const Google = ()=>{
 
     const handleClick = ()=>{
-        axios.get('/auth/google')
+        axios.get('https://testingassignment.herokuapp.com/auth/google')
     }
 
     return(
