@@ -6,6 +6,9 @@ body{
 }
 
 #root{
-    background-color: rgba(0,0,0,0.25);
-    padding: 5px;
+    background-color: rgba(0,0,0,0.35);
+}
+
+.table{
+    margin:5px;
 }

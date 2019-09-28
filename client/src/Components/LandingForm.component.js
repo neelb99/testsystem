@@ -134,7 +134,7 @@ const Landingform = ()=>{
 
     return(
         <React.Fragment>
-            <div className="jumbotron" >
+            <div className="jumbotron col-10 col-md-4">
                 <div className="btn-group" id="buttongroup">
                     <button className="btn btn-secondary" onClick={()=>{setFormType('login'); setDisplayError('none')}}>Login</button>
                     <button className= "btn btn-secondary" onClick={()=>{setFormType('Register'); setDisplayError('none')}}>Register</button>
