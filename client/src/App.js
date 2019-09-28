@@ -7,6 +7,8 @@ import AddQuestion from './Components/AddQuestion.component';
 import Test from './Components/Test.component';
 import ViewReports from './Components/ViewReports.component'
 import Home from './Components/Home.component';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
 
 function App() {
   return (

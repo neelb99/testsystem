@@ -1,4 +1,9 @@
 import React,{useState,useEffect} from 'react';
+import Card from './Card.component';
+import './css/Dashboard.css';
+import report from '../images/report.png';
+import star from '../images/star.png';
+import exam from '../images/exam.png'
 
 const Home = ()=>{
     const [loaded,setLoaded] = useState(false);
@@ -27,9 +32,9 @@ const Home = ()=>{
             else{
                 return(
                     <React.Fragment>
-                        <a href='/test'>Take Test</a><br />
-                        <a href='/leaderboard'>Leaderboard</a><br />
-                        <a href={'/viewreports/'+username}>Previous Reports</a>
+                        <Card img={exam} link="/test" buttonText="Take Test"/>
+                        <Card img={star} link="/leaderboard" buttonText="Leaderboard"/>
+                        <Card img={report} link= {"/viewreports"+username} buttonText="Previous Reports"/>
                     </React.Fragment>
                 );
             }
@@ -37,9 +42,9 @@ const Home = ()=>{
     }
 
     return(
-        <React.Fragment>
+        <div id="dashboard">
             {loadPage()}
-        </React.Fragment>
+        </div>
     );
 
 }

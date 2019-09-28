@@ -1,5 +1,6 @@
 import React,{useState,useEffect} from 'react';
 import LandingForm from './LandingForm.component';
+import './css/Landing.css'
 
 const Landing = ()=>{
     // Load the page only if this is true
@@ -19,7 +20,6 @@ const Landing = ()=>{
         if(loaded){
             return(
                 <React.Fragment>
-                    <h1>Welcome</h1>
                     <LandingForm />
                 </React.Fragment>
             );
@@ -27,9 +27,9 @@ const Landing = ()=>{
     }
 
     return(
-        <React.Fragment>
+        <div id="landingPage" className="text-center">
             {loadPage()}
-        </React.Fragment>
+        </div>
     );
 }
 

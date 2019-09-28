@@ -99,9 +99,14 @@ const Landingform = ()=>{
             return(
                 <form onSubmit={login}>
                     <h1>Login</h1>
-                    Username: <input type="text" value={username} onChange={onChangeUsername}></input>
-                    Password: <input type="password" value={password} onChange={onChangePassword}></input>
-                    <input type="submit"></input>
+                    <p style={errorStyle}>{error}</p>
+                    <div className="form-group">
+                        <input className="form-control" placeholder= "Username" type="text" value={username} onChange={onChangeUsername}></input>
+                    </div>
+                    <div className="form-group">
+                        <input className="form-control" placeholder="Password" type="password" value={password} onChange={onChangePassword}></input>
+                    </div>
+                    <input className="form-control btn btn-success" type="submit"></input>
                 </form>
             );
         }
@@ -109,9 +114,14 @@ const Landingform = ()=>{
             return(
                 <form onSubmit={register}>
                     <h1>Register</h1>
-                    Username: <input type="text" value={username} onChange={onChangeUsername}></input>
-                    Password: <input type="password" value={password} onChange={onChangePassword}></input>
-                    <input type="submit"></input>
+                    <p style={errorStyle}>{error}</p>
+                    <div className="form-group">
+                        <input className="form-control" placeholder="Username" type="text" value={username} onChange={onChangeUsername}></input>
+                    </div>
+                    <div className="form-group">
+                        <input className = "form-control" placeholder="Password" type="password" value={password} onChange={onChangePassword}></input>
+                    </div>
+                    <input className="form-control btn btn-success" type="submit"></input>
                 </form>
             );
     }
@@ -124,10 +134,13 @@ const Landingform = ()=>{
 
     return(
         <React.Fragment>
-            <button onClick={()=>{setFormType('login'); setDisplayError('none')}}>Login</button>
-            <button onClick={()=>{setFormType('Register'); setDisplayError('none')}}>Register</button>
-            <p style={errorStyle}>{error}</p>
-            {getForm()}
+            <div className="jumbotron" >
+                <div className="btn-group" id="buttongroup">
+                    <button className="btn btn-secondary" onClick={()=>{setFormType('login'); setDisplayError('none')}}>Login</button>
+                    <button className= "btn btn-secondary" onClick={()=>{setFormType('Register'); setDisplayError('none')}}>Register</button>
+                </div>
+                {getForm()}
+            </div>
         </React.Fragment>
     );
 }

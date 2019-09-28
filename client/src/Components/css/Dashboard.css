@@ -1,0 +1,27 @@
+#dashboard{
+    padding-top:30px;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+
+#dashboard .jumbotron{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top:10px;
+    padding-bottom:10px;
+    background-color: rgba(233, 236, 239,1)
+}
+
+#dashboard .btn{
+    margin-top:8px;
+    margin-bottom:8px;
+}
+
+#dashboard img{
+    margin-bottom:8px;
+}

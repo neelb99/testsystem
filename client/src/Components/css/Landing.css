@@ -1,0 +1,28 @@
+#landingPage{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+#landingPage h1{
+    padding: 20px;
+}
+
+#landingPage h1{
+    color: black;
+}
+
+/* #landingPage #buttongroup .btn-secondary{
+    background-color: black!important;
+} */
+
+#landingPage .jumbotron{
+    color:black;
+}
+
+
+#landingPage #buttongroup{
+    align-self: center;
+}
