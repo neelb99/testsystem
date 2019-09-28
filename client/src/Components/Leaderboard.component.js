@@ -1,5 +1,6 @@
 import React,{useState,useEffect} from 'react';
 import axios from 'axios';
+import './css/Leaderboard.css';
 
 const Leaderboard = ()=>{
     const [reports,setReports] = useState([]);
@@ -19,7 +20,7 @@ const Leaderboard = ()=>{
         const sorted = reports.sort((a,b)=>b.score-a.score);
         if(loaded){
             return (
-                <table>
+                <table className="table table-dark text-center">
                     <thead>
                         <tr>
                             <th>Name</th>
@@ -44,9 +45,9 @@ const Leaderboard = ()=>{
     }
 
     return(
-        <React.Fragment>
+        <div id="leaderboard">
             {generateTable()}
-        </React.Fragment>
+        </div>
     );
 }
 

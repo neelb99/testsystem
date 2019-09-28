@@ -1,5 +1,7 @@
 import React,{useState,useEffect} from 'react';
 import axios from 'axios';
+import ReportCard from './ReportCard.component';
+import './css/Reports.css'
 
 const ViewReports = props=>{
     const [loaded,setLoaded] = useState(false);
@@ -16,7 +18,7 @@ const ViewReports = props=>{
         else{
             axios.get('/api/reports/view/'+urlname)
                 .then(res=>{
-                    setReports(res.data)
+                    setReports(res.data.reverse())
                     setLoaded(true);
                 })
         }
@@ -26,13 +28,9 @@ const ViewReports = props=>{
         if(loaded){
             return(
                 <React.Fragment>
-                    {reports.map(report=>{
+                    {reports.map((report,index)=>{
                         return(
-                            <div key={report._id}>
-                                <h4>Score:{report.score}</h4>
-                                <h4>Suggestion:{report.suggestion}</h4>
-                                <h4>Date: {report.date.substring(0,10)}</h4>
-                            </div>
+                            <ReportCard key={report._id} number={reports.length-(index)} score={report.score} suggestion={report.suggestion} date={report.date.substring(0,10)}/>
                         );
                     })}
                 </React.Fragment>
@@ -41,9 +39,9 @@ const ViewReports = props=>{
     }
 
     return(
-        <React.Fragment>
+        <div id="reports">
             {loadPage()}
-        </React.Fragment>
+        </div>
     )
 }
 

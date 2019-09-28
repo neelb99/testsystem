@@ -1,0 +1,28 @@
+#reports{
+    padding-top:30px;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+#reports h3{
+    padding-bottom:10px;
+}
+
+#reports .jumbotron{
+    display: flex;
+    flex-direction: column;
+
+    padding-top:10px;
+    padding-bottom:10px;
+    background-color: rgba(233, 236, 239,0.9);
+    color:black;
+    border:5px solid black;
+}
+
+#reports .row{
+    margin:0;
+}

@@ -14,7 +14,7 @@
     align-items: center;
     padding-top:10px;
     padding-bottom:10px;
-    background-color: rgba(233, 236, 239,1)
+    background-color: rgba(233, 236, 239,0.9)
 }
 
 #dashboard .btn{
@@ -23,5 +23,6 @@
 }
 
 #dashboard img{
+    margin-top:8px;
     margin-bottom:8px;
 }

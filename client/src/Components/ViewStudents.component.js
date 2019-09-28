@@ -1,5 +1,6 @@
 import React,{useState, useEffect} from 'react';
 import axios from 'axios';
+import './css/ViewStudents.css';
 
 const ViewStudents = ()=>{
     const [students,setStudents] = useState([]);
@@ -34,7 +35,7 @@ const ViewStudents = ()=>{
     const generateTable = ()=>{
         if(loaded){
             return (
-                <table>
+                <table className="table table-dark text-center">
                     <thead>
                         <tr>
                             <th>Name</th>
@@ -47,8 +48,8 @@ const ViewStudents = ()=>{
                             return(
                                 <tr key={student._id}>
                                     <td>{student.username}</td>
-                                    <td><button onClick = {()=>viewStudent(student.username)}>View</button></td>
-                                    <td><button onClick = {()=>deleteStudent(student._id)}>Delete</button></td>
+                                    <td><button className="btn btn-primary" onClick = {()=>viewStudent(student.username)}>View</button></td>
+                                    <td><button className= "btn btn-danger" onClick = {()=>deleteStudent(student._id)}>Delete</button></td>
                                 </tr>
                             );
                         })}
@@ -59,9 +60,9 @@ const ViewStudents = ()=>{
     }
 
     return(
-        <React.Fragment>
+        <div id="viewstudents">
             {generateTable()}
-        </React.Fragment>
+        </div>
     );
 }
 
