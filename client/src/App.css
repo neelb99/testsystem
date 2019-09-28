@@ -10,5 +10,9 @@ body{
 }
 
 .table{
-    margin:5px;
+    max-width:95vw;
+    margin:auto;
+    margin-bottom:10px;
+    margin-top:10px;
+    border: 2px solid black;
 }
