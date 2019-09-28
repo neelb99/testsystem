@@ -11,7 +11,7 @@ passport.use(
   {
    clientID: "54840836267-8k94rdoo01o5barchm8akbvu7tkku07b.apps.googleusercontent.com",
    clientSecret: "P_EHI-Ms2iiI--qCwfyXmU06",
-   callbackURL: "http://localhost:5000/auth/google/callback"
+   callbackURL: "https://testingassignment.herokuapp.com/auth/google/callback"
   },
   function(accessToken, refreshToken, profile, done) {
    var userData = {

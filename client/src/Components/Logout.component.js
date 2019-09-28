@@ -5,8 +5,8 @@ import './css/nav.css';
 const Logout = ()=>{
     
     const handleClick = ()=>{
-        sessionStorage.removeItem('username');
         window.location='/';
+        sessionStorage.removeItem('username');
         sessionStorage.removeItem('role');
     }
 
